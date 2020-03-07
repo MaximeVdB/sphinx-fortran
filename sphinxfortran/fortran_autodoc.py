@@ -1314,7 +1314,7 @@ class F90toRst(object):
         if fdecs:
             fdecs = '\n'.join(fdecs)
             routines = self.format_subsection(
-                'Subroutines and functions', indent=indent) + fdecs
+                'Functions and subroutines', indent=indent) + fdecs
         return routines
 
     def format_module(self, block, indent=0):
