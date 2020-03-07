@@ -1172,8 +1172,8 @@ class FortranDomain(Domain):
         'prog': FortranXRefRole(),
         'type': FortranXRefRole(),
         'var': FortranXRefRole(),
-        'func': FortranXRefRole(fix_parens=True),
-        'subr': FortranXRefRole(fix_parens=True),
+        'func': FortranXRefRole(fix_parens=False),
+        'subr': FortranXRefRole(fix_parens=False),
         'mod': FortranXRefRole(),
     }
     initial_data = {
