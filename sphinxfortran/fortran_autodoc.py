@@ -1258,7 +1258,7 @@ class F90toRst(object):
         # Functions and subroutines
         flist = self.get_blocklist('functions', module)
         if flist:
-            decs.append(':Routines: ' +
+            decs.append(':Procedures: ' +
                         ', '.join([':f:func:`~%s/%s`' %
                                    (module, ff['name']) for ff in flist]))
 
