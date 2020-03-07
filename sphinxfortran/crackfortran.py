@@ -931,6 +931,27 @@ def analyzeline(m, case, line):
         if re.match(r'python\s*module', block, re.I):
             block = 'python module'
         name, args, result, bind = _resolvenameargspattern(m.group('after'))
+
+        if block == 'type':
+            # Problem parsing >= F200X 'abstract' and 'extend(...)' fields
+            # e.g.: type, abstract :: VagueClass
+            #       type, extends(VagueClass) :: SpecificClass
+            if name is None:
+                abstractpattern = re.compile(
+                  r'[\s,]*(?P<abstract>\b[\w]+\b)[\s,:]*(?P<name>\b[\w]+\b)\s*')
+                mnew = abstractpattern.match(m.group('after'))
+                if mnew is None:
+                    extendpattern = re.compile(
+   r'[\s,\bextends\(]*(?P<parentname>\b[\w]+\b)[\s,:\)]*(?P<name>\b[\w]+\b)\s*')
+                    mnew = extendpattern.match(m.group('after'))
+                if mnew is None:
+                    name = None
+                else:
+                    name = mnew.group('name')
+
+            assert name is not None
+            name = name.capitalize()
+
         if name is None:
             if block == 'block data':
                 name = '_BLOCK_DATA_'
