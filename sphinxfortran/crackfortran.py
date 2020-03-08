@@ -1911,7 +1911,8 @@ def postcrack3(postlist):
                 args = subblock['args']
                 if args[0] in ['self', 'this']:
                     # is a type-bound procedure
-                    var = {'typespec': 'type_bound_procedure'}
+                    var = {'typespec': 'type_bound_procedure',
+                           'attrspec': ['type-bound procedure']}
                     classname = subblock['vars']['self']['typename']
                     #block['body'][classdict[classname]]['procedures'][name] = var
                     block['body'][classdict[classname]]['vars'][name] = var

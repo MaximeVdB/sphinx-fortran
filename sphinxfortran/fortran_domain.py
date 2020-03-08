@@ -216,11 +216,19 @@ class FortranCompleteField(FortranField, GroupedField):
                         fieldtype[0], nodes.Text):
                     thistypename = fieldtype[0].astext()
                     #typename = u''.join(n.astext() for n in fieldtype)
-                    par += self.make_xref(self.typerolename,
-                                          domain,
-                                          thistypename,
-                                          modname=modname,
-                                          typename=typename)
+                    if 'type_bound_procedure' in thistypename:
+                        #print('XXXXX', fieldarg, 'X', fieldtype[0].astext())
+                        par += self.make_xref('type_bound_procedure',
+                                              domain,
+                                              fieldarg,
+                                              modname=modname,
+                                              typename=typename)
+                    else:
+                        par += self.make_xref(self.typerolename,
+                                              domain,
+                                              thistypename,
+                                              modname=modname,
+                                              typename=typename)
                 else:
                     par += fieldtype
             if fieldattrs:
