@@ -347,7 +347,7 @@ class F90toRst(object):
                             continue
                         m = block['vardescsearch'](line)
                         if m:
-                            block['vars'][m.group('varname').lower()]['desc'] = m.group(
+                            block['vars'][m.group('varname')]['desc'] = m.group(
                                 'vardesc')
                 for bvar in list(block['vars'].values()):
                     bvar.setdefault('desc', '')
@@ -437,7 +437,7 @@ class F90toRst(object):
                 if 'vardescsearch' in block:
                     m = block['vardescsearch'](line)
                     if m:
-                        block['vars'][m.group('varname').lower()]['desc'] = m.group(
+                        block['vars'][m.group('varname')]['desc'] = m.group(
                             'vardesc')
 
         # Fill empty descriptions
