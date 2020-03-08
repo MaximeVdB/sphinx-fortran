@@ -78,7 +78,7 @@ def convert_arithm(node, expr, modname=None, nodefmt=nodes.Text):
             else:
                 node += nodefmt(num, num)
         if op:
-            op = op.replace(':', '*')
+            #op = op.replace(':', '*')
             node += nodefmt(op, op)
 
 
