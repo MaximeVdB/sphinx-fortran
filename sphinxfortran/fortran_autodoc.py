@@ -877,7 +877,6 @@ class F90toRst(object):
         :f:func:`~mymodule.myfunc`
         """
         # Alias?
-        fname = fname.lower()
         if aliasof is not None:
             falias = fname
             fname = aliasof
