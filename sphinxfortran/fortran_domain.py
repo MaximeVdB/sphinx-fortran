@@ -526,7 +526,7 @@ class FortranObject(ObjectDescription):
             shapenames=('oshape',),
             attrnames=('oattrs', 'oattr'),
             can_collapse=True),
-        FortranCompleteField('typefield', label=_('Type fields'),
+        FortranCompleteField('typefield', label=_('Attributes & procedures'),
                              names=('f', 'field', 'typef', 'typefield'),
                              # rolename='typef',
                              typerolename='type',
