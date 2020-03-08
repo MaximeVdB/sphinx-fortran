@@ -1197,7 +1197,7 @@ class F90toRst(object):
         description = self.format_lines(comments, indent + 1)
 
         # Add use of modules
-        use = self.format_use(block, indent=indent + 1, short=True)
+        use = self.format_use(block, indent=indent + 1, short=False)
 
         # Add calls
         calls = []
