@@ -225,7 +225,7 @@ class FortranCompleteField(FortranField, GroupedField):
                     par += fieldtype
             if fieldattrs:
                 if fieldtype:
-                    par += nodes.emphasis(',', ',')
+                    par += nodes.emphasis(', ', ', ')
                 par += fieldattrs
             if fieldtype or fieldattrs:
                 par += nodes.emphasis(']', ']')
