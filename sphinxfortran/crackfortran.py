@@ -166,7 +166,7 @@ pyffilename = ''
 f77modulename = ''
 skipemptyends = 0      # for old F77 programs without 'program' statement
 ignorecontains = 1
-dolowercase = 1
+dolowercase = 0
 debug = []
 
 # Global variables
@@ -950,7 +950,6 @@ def analyzeline(m, case, line):
                     name = mnew.group('name')
 
             assert name is not None
-            name = name.capitalize()
 
         if name is None:
             if block == 'block data':
