@@ -1896,6 +1896,28 @@ def postcrack2(block, tab='', param_map=None):
     return block
 
 
+def postcrack3(postlist):
+    # Retro-actively at type-bound procedures
+    for block in postlist:  # usually only of length 1 (1 file -> 1 module/prog)
+        classdict = {}
+        for iblock, subblock in enumerate(block['body']):
+            kind = subblock['block']  # 'type', 'function', 'subroutine' etc
+            name = subblock['name']
+            if kind == 'type':
+                classdict[name] = iblock
+                #if 'procedures' not in subblock:
+                #    subblock['procedures'] = {}
+            elif kind in ['function', 'subroutine']:
+                args = subblock['args']
+                if args[0] in ['self', 'this']:
+                    # is a type-bound procedure
+                    var = {'typespec': 'type_bound_procedure'}
+                    classname = subblock['vars']['self']['typename']
+                    #block['body'][classdict[classname]]['procedures'][name] = var
+                    block['body'][classdict[classname]]['vars'][name] = var
+                    block['body'][classdict[classname]]['sortvars'].append(name)
+    return postlist
+
 def postcrack(block, args=None, tab=''):
     """
     TODO:
@@ -3276,6 +3298,7 @@ def crackfortran(files):
     postlist = postcrack(grouplist[0])
     outmess('Post-processing (stage 2)...\n', 0)
     postlist = postcrack2(postlist)
+    postlist = postcrack3(postlist)
     return usermodules + postlist
 
 
