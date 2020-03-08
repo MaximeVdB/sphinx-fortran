@@ -553,11 +553,11 @@ groupbegins77 = r'program|block\s*data'
 beginpattern77 = re.compile(
     beforethisafter % ('', groupbegins77, groupbegins77, '.*'), re.I), 'begin'
 groupbegins90 = groupbegins77 + \
-    r'|module(?!\s*procedure)|python\s*module|interface|type(?!\s*\()'
+    r'|module(?!\s*procedure)|python\s*module|interface|associate|type(?!\s*\()'
 beginpattern90 = re.compile(
     beforethisafter % ('', groupbegins90, groupbegins90, '.*'), re.I), 'begin'
 groupends = (r'end|endprogram|endblockdata|endmodule|endpythonmodule|'
-             r'endinterface|endsubroutine|endfunction')
+             r'endinterface|endsubroutine|endfunction|endassociate')
 endpattern = re.compile(
     beforethisafter % ('', groupends, groupends, r'[\w\s]*'), re.I), 'end'
 # endifs='end\s*(if|do|where|select|while|forall)'
