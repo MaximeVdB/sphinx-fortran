@@ -535,10 +535,10 @@ class FortranObject(ObjectDescription):
                              shapenames=('rshape',),
                              attrnames=('rattrs', 'rattr'),
                              can_collapse=True),
-        FortranCallField('calledfrom', label=_('Called from'),
-                         names=('calledfrom', 'from')),
-        FortranCallField('callto', label=_('Call to'),
-                         names=('callto', 'to')),
+        #FortranCallField('calledfrom', label=_('Called from'),
+        #                 names=('calledfrom', 'from')),
+        #FortranCallField('callto', label=_('Call to'),
+        #                 names=('callto', 'to')),
     ]
 
     # These Fortran types aren't described anywhere, so don't try to create

@@ -142,7 +142,7 @@ class F90toRst(object):
         self.scan()
 
         # Add function 'call from' to index
-        self.build_callfrom_index()
+        #self.build_callfrom_index()
 
         # Other inits
         self.rst = OrderedDict()
@@ -413,7 +413,7 @@ class F90toRst(object):
 
             # Index calls
             block['callto'] = []
-            if subsrc is not None:
+            if False: #subsrc is not None:
                 self.join_src(subsrc)
                 for line in subsrc[1:-1]:
                     if line.strip().startswith('!'):
