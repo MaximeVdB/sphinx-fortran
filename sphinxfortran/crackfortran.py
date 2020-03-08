@@ -652,6 +652,7 @@ def crackline(line, reset=0):
     global skipblocksuntil, skipemptyends, previous_context, gotnextfile
 
     line = line.replace('class', 'type')  # DIRTY HACK
+    line = line.replace('type is', 'xxx is')  # (yet another) DIRTY HACK
 
     _, has_semicolon = split_by_unquoted(line, ";")
     if has_semicolon and not (f2pyenhancementspattern[0].match(line) or
