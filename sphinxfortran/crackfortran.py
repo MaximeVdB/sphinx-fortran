@@ -1909,7 +1909,7 @@ def postcrack3(postlist):
                 #    subblock['procedures'] = {}
             elif kind in ['function', 'subroutine']:
                 args = subblock['args']
-                if args[0] in ['self', 'this']:
+                if len(args) > 0 and args[0] in ['self', 'this']:
                     # is a type-bound procedure
                     var = {'typespec': 'type_bound_procedure',
                            'attrspec': ['type-bound procedure']}
