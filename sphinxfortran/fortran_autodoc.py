@@ -204,7 +204,7 @@ class F90toRst(object):
                         # Variables
                         varnames = subblock['sortvars']
                         if subblock['block'] == 'type':
-                            varnames.sort()
+                            pass #varnames.sort()
                         for varname in varnames:
                             subblock['vars'][varname]['name'] = varname
 
@@ -223,7 +223,7 @@ class F90toRst(object):
                                 self.routines[fname]['aliases'].append(falias)
 
                 # Module variables
-                for varname in sorted(block['sortvars']):
+                for varname in block['sortvars']: #sorted(block['sortvars']):
                     bvar = block['vars'][varname]
                     if varname not in self.routines:
                         self.variables[varname] = bvar
@@ -273,8 +273,10 @@ class F90toRst(object):
             # reversed+sorted is a hack to avoid conflicts when variables share
             # the same prefix
             if block['sortvars']:
+                #sreg = r'.*\b(?P<varname>%s)\b\s*(?P<dims>\([\*:,\w]+\))?[^!\)]*!\s*(?P<vardesc>.*)\s*' % '|'.join(
+                #    reversed(sorted(block['sortvars'])))
                 sreg = r'.*\b(?P<varname>%s)\b\s*(?P<dims>\([\*:,\w]+\))?[^!\)]*!\s*(?P<vardesc>.*)\s*' % '|'.join(
-                    reversed(sorted(block['sortvars'])))
+                    reversed(block['sortvars']))
                 block['vardescsearch'] = re.compile(sreg, re.I).search
             else:
                 block['vardescsearch'] = lambda x: None
@@ -681,7 +683,7 @@ class F90toRst(object):
         baselist = list(getattr(self, choice).values())
         sellist = [v for v in baselist if 'module' in v and v['module']
                    == module.lower()]
-        if sort:
+        if False: #sort:
             sellist.sort(key=itemgetter('name'))
         return sellist
 
@@ -1066,7 +1068,7 @@ class F90toRst(object):
 
         # Variables
         vlines = []
-        for varname in sorted(block['sortvars']):
+        for varname in block['sortvars']: #sorted(block['sortvars']):
             bvar = block['vars'][varname]
             vlines.append(self.format_argfield(bvar, role='f'))
         variables = self.format_lines(vlines, indent=indent + 1) + '\n'
