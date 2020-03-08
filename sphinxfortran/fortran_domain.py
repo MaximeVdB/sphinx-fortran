@@ -94,6 +94,9 @@ def parse_shape(shape):
 
 def add_shape(node, shape, modname=None, nodefmt=nodes.Text):
     """Format a shape expression for a node"""
+    shape = shape.replace('(,', '(:,')
+    shape = shape.replace(',,', ',:,')
+    shape = shape.replace(',)', ',:)')
     dims = re.split(r'\s*,\s*', shape.strip('( )'))
     node += nodefmt(' (', ' (')
     convert_arithm(node, shape.strip('( )'), modname=modname, nodefmt=nodefmt)
