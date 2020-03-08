@@ -975,7 +975,7 @@ class F90toRst(object):
             - *block*: a variable block
         """
         if 'dimension' in block:
-            return'(%s)' % (','.join([s.strip('()') for s in block['dimension']]))
+            return '(%s)' % (', '.join([s.strip('()') for s in block['dimension']]))
             # return'(%s)'%(','.join([s.replace(':','\:').strip('()') for s in
             # block['dimension']]))
         return ''
