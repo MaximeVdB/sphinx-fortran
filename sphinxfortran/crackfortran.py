@@ -2750,7 +2750,7 @@ def analyzevars(block):
                             vars[n]['intent'].append('c')
                     else:
                         errmess(
-                            "analyzevars: charselector=%r unhandled." % (d))
+                            "analyzevars: charselector=%r unhandled.\n" % (d))
         if 'check' not in vars[n] and 'args' in block and n in block['args']:
             flag = 'depend' not in vars[n]
             if flag:
