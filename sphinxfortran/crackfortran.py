@@ -653,6 +653,8 @@ def crackline(line, reset=0):
 
     line = line.replace('class', 'type')  # DIRTY HACK
     line = line.replace('type is', 'xxx is')  # (yet another) DIRTY HACK
+    if line.strip() in ['interface', 'end interface']:
+        line = '\n'
 
     _, has_semicolon = split_by_unquoted(line, ";")
     if has_semicolon and not (f2pyenhancementspattern[0].match(line) or
