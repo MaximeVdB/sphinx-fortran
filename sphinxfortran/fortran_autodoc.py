@@ -501,6 +501,9 @@ class F90toRst(object):
             src = self.get_src(block)
         blocktype = block['block'].lower()
         blockname = block['name'].lower()
+        if 'prefix' in block and len(block['prefix']) > 0:
+            blocktype = block['prefix'] + ' ' + blocktype
+
         ftypes = r'(?:(?:%s).*\s+)?' % fortrantypes if blocktype == 'function' else ''
         #rstart = re.compile(
         #    r"^\s*%s%s\s+%s\b.*$" %
