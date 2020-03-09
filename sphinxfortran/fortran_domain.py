@@ -536,7 +536,7 @@ class FortranObject(ObjectDescription):
                              prefix='% ',
                              strong=False,
                              can_collapse=False),
-        FortranCompleteField('return', label=_('Return'),
+        FortranCompleteField('return', label=_('Returns'),
                              names=('r', 'return', 'returns'),
                              typerolename='type',
                              typenames=('returntype', 'rtype'),
