@@ -941,23 +941,31 @@ def analyzeline(m, case, line):
         name, args, result, bind = _resolvenameargspattern(m.group('after'))
 
         if block == 'type':
-            # Problem parsing >= F200X 'abstract' and 'extend(...)' fields
+            # Problem parsing >= F200X 'abstract' and 'extend(...)'
+            # and bind(c) fields
             # e.g.: type, abstract :: VagueClass
             #       type, extends(VagueClass) :: SpecificClass
             if name is None:
                 abstractpattern = re.compile(
                   r'[\s,]*(?P<abstract>\b[\w]+\b)[\s,:]*(?P<name>\b[\w]+\b)\s*')
                 mnew = abstractpattern.match(m.group('after'))
+
                 if mnew is None:
                     extendpattern = re.compile(
    r'[\s,\bextends\(]*(?P<parentname>\b[\w]+\b)[\s,:\)]*(?P<name>\b[\w]+\b)\s*')
                     mnew = extendpattern.match(m.group('after'))
+
+                if mnew is None:
+                    extendpattern = re.compile(
+   r'[\s,\bbind\(]*(?P<binding>\b[\w]+\b)[\s,:\)]*(?P<name>\b[\w]+\b)\s*')
+                    mnew = extendpattern.match(m.group('after'))
+
                 if mnew is None:
                     name = None
                 else:
                     name = mnew.group('name')
 
-            assert name is not None
+            assert name is not None, line
 
         if name is None:
             if block == 'block data':
