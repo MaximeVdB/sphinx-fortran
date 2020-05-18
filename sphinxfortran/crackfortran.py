@@ -945,10 +945,16 @@ def analyzeline(m, case, line):
             # and bind(c) fields
             # e.g.: type, abstract :: VagueClass
             #       type, extends(VagueClass) :: SpecificClass
+            #       type, abstract, extends(VagueClass) :: SpecificClass
             if name is None:
-                abstractpattern = re.compile(
-                  r'[\s,]*(?P<abstract>\b[\w]+\b)[\s,:]*(?P<name>\b[\w]+\b)\s*')
-                mnew = abstractpattern.match(m.group('after'))
+                abstractextendpattern = re.compile(
+   r'[\s,\babstract, extends\(]*(?P<parentname>\b[\w]+\b)[\s,:\)]*(?P<name>\b[\w]+\b)\s*')
+                mnew = abstractextendpattern.match(m.group('after'))
+
+                if mnew is None:
+                    abstractpattern = re.compile(
+                      r'[\s,]*(?P<abstract>\b[\w]+\b)[\s,:]*(?P<name>\b[\w]+\b)\s*')
+                    mnew = abstractpattern.match(m.group('after'))
 
                 if mnew is None:
                     extendpattern = re.compile(
