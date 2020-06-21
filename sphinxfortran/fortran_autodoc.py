@@ -684,8 +684,20 @@ class F90toRst(object):
         module = module.lower()
         assert module in self.modules, "Wrong module name"
         baselist = list(getattr(self, choice).values())
-        sellist = [v for v in baselist if 'module' in v and v['module']
-                   == module.lower()]
+        #sellist = [v for v in baselist if 'module' in v and v['module']
+        #           == module.lower()]
+        sellist = []
+        for v in baselist:
+            if 'module' in v:
+                if v['module'] == module.lower():
+                    sellist.append(v)
+            else:
+                # Add module-less type-bound procedures that are
+                # in a different file that is include'd in the module
+                for block in self.modules[module]['body']:
+                    if block['name'] == v['name']:
+                        sellist.append(v)
+
         if False: #sort:
             sellist.sort(key=itemgetter('name'))
         return sellist
